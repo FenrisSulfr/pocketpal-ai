@@ -1,0 +1,111 @@
+name: Build Vulkan APK
+
+on:
+  push:
+    branches: [vulkan-mali]
+  workflow_dispatch:
+    inputs:
+      vulkan:
+        description: 'Build the Vulkan variant (false = unchanged baseline)'
+        type: boolean
+        default: true
+      vk_disable_f16:
+        description: 'Set GGML_VK_DISABLE_F16 at app start'
+        type: boolean
+        default: true
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      ORG_GRADLE_PROJECT_rnllamaBuildFromSource: 'true'
+      ORG_GRADLE_PROJECT_reactNativeArchitectures: arm64-v8a
+      ORG_GRADLE_PROJECT_vkDisableF16: ${{ github.event_name == 'push' || inputs.vk_disable_f16 }}
+      BUILD_VULKAN: ${{ github.event_name == 'push' || inputs.vulkan }}
+      RNLLAMA_SKIP_POSTINSTALL: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Maximize build space
+        run: |
+          df -h /
+          sudo rm -rf /usr/share/dotnet /opt/ghc /opt/hostedtoolcache
+          df -h /
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.21.0'
+          cache: yarn
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: '17'
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install --frozen-lockfile
+
+      - name: Install NDK
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --install "ndk;27.3.13750724" | tail -3
+
+      - name: Add Vulkan backend
+        if: env.BUILD_VULKAN == 'true'
+        run: ./fork/setup-vulkan.sh
+
+      - name: Select rnllama variants
+        run: |
+          V=rnllama,rnllama_v8,rnllama_v8_2_dotprod_i8mm
+          if [ "$BUILD_VULKAN" = "true" ]; then V="$V,rnllama_v8_2_dotprod_i8mm_vulkan"; fi
+          echo "ORG_GRADLE_PROJECT_rnllamaVariants=$V" >> "$GITHUB_ENV"
+
+      - name: Create placeholder config
+        run: |
+          cat > android/app/google-services.json << 'JSON'
+          {"project_info":{"project_number":"000000000000","project_id":"dummy-project-for-ci","storage_bucket":"dummy-project-for-ci.appspot.com"},
+           "client":[{"client_info":{"mobilesdk_app_id":"1:000000000000:android:0000000000000000","android_client_info":{"package_name":"com.pocketpalai.vulkan"}},"api_key":[{"current_key":"dummy-api-key-for-ci-builds"}]}]}
+          JSON
+          cat > .env << 'ENV'
+          FIREBASE_FUNCTIONS_URL=https://dummy-firebase-url.com
+          SUPABASE_URL=https://dummy-supabase-url.supabase.co
+          SUPABASE_ANON_KEY=dummy-anon-key-for-ci-builds
+          PALSHUB_API_BASE_URL=https://dummy-palshub-api.com
+          APP_URL=pocketpal://app
+          ENABLE_PALSHUB_INTEGRATION=true
+          ENABLE_AUTHENTICATION=true
+          ENABLE_OFFLINE_MODE=true
+          GOOGLE_IOS_CLIENT_ID=dummy-ios-client-id.apps.googleusercontent.com
+          GOOGLE_WEB_CLIENT_ID=dummy-web-client-id.apps.googleusercontent.com
+          ENV
+
+      - name: Build APK
+        working-directory: android
+        run: |
+          set -o pipefail
+          ./gradlew assembleProdRelease --console=plain 2>&1 | tee android-build.log
+
+      - name: Check APK contents
+        run: |
+          APK=$(ls android/app/build/outputs/apk/prod/release/*.apk | head -1)
+          unzip -l "$APK" | grep -E 'lib/.*rnllama'
+          if [ "$BUILD_VULKAN" = "true" ]; then
+            unzip -l "$APK" | grep -q 'librnllama_v8_2_dotprod_i8mm_vulkan.so'
+            mkdir -p check
+            unzip -o -q "$APK" 'lib/arm64-v8a/librnllama_v8_2_dotprod_i8mm_vulkan.so' -d check
+            strings check/lib/arm64-v8a/librnllama_v8_2_dotprod_i8mm_vulkan.so | grep -m1 'ggml_vulkan'
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pocketpal-vulkan-${{ env.BUILD_VULKAN }}-f16off-${{ env.ORG_GRADLE_PROJECT_vkDisableF16 }}-${{ github.run_number }}
+          path: android/app/build/outputs/apk/prod/release/*.apk
+          retention-days: 30
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-log-${{ github.run_number }}
+          path: android/android-build.log
+          retention-days: 14
