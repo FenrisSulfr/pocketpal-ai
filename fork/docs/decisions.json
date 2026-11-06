@@ -15,8 +15,9 @@
     {"date": "2026-11-06", "id": "pregenerate-shaders", "rejected": ["externalproject-host-build"]},
     {"date": "2026-11-06", "id": "feature-tests-with-O", "rejected": ["remove-tests-hardcoded"]},
     {"date": "2026-11-06", "id": "f16-build-switch-default-on", "rejected": ["in-app-toggle-now"]},
-    {"date": "2026-11-06", "id": "own-package-id-debug-keystore", "rejected": ["per-run-keystore"]}
+    {"date": "2026-11-06", "id": "own-package-id-debug-keystore", "rejected": ["per-run-keystore"]},
+    {"date": "2026-11-06", "id": "link-api29-libvulkan-stub", "rejected": ["raise-minsdk-29"]}
   ],
-  "status": {"ci": "not_run", "device_test": "not_run"},
+  "status": {"ci": "success_run_2", "device_test": "not_run"},
   "green_criteria": ["active_gpu_shown", "gguf_answers_correctly", "output_matches_cpu", "speed_near_termux"]
 }

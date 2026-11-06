@@ -20,18 +20,17 @@ Maschinenlesbare Fassung: `decisions.json`.
 | 2026-11-06 | Feature-Tests mit `-O`, jeder Fehler heißt OFF | Behebt die Ursache des `shaderc`-Fehlers | Tests fest entfernen wie im Termux-Patch |
 | 2026-11-06 | F16 als Build-Schalter, Standard an | Geringster Aufwand, Vergleich über zwei APKs | Schalter in der App (später möglich) |
 | 2026-11-06 | Eigene Paket-ID `com.pocketpalai.vulkan`, Debug-Keystore | Parallelinstallation, stabile Signatur ohne Secret | Keystore pro Lauf (bricht Updates) |
-
 | 2026-11-06 | Gegen `libvulkan.so`-Stub von API 29 linken | Lauf #1 scheiterte am Link: `vkGetPhysicalDeviceFeatures2` fehlt im API-24-Stub (minSdk 24) | minSdk der App auf 29 heben |
 
 ## Log
 
 - 2026-11-06 Lauf #1 (`fe1929f`): Shader ok (155, alle optionalen Features OFF), Link-Fehler `vkGetPhysicalDeviceFeatures2`, 35 min.
+- 2026-11-06 Lauf #2 (`1e4a476`): Build erfolgreich in 47 min, APK enthält `librnllama_v8_2_dotprod_i8mm_vulkan.so` (39 MB). Gerätetest offen.
 
 ## Offene Risiken
 
 - Der Keystore ist öffentlich im Repo. Für ein Dauer-Setup braucht es einen eigenen Keystore als Actions-Secret.
-- `glslc` aus NDK r27 ist älter als die Shader-Quellen. Lokal nicht testbar, der erste Lauf zeigt es.
-- Der NDK-Build der Variante ist ungetestet.
+- Alle optionalen Shader-Features sind OFF (auch integer_dot). Möglicher Leistungsverlust gegenüber Termux, ungeprüft.
 - F16-Vorteil stammt aus sd.cpp, für Textmodelle unbelegt.
 - `isGpuAvailable` lädt in `checkGpuSupport` die Backend-Liste, Auswirkung auf die Startzeit ungeprüft.
 
