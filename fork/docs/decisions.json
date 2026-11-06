@@ -1,0 +1,22 @@
+{
+  "project": "pocketpal-vulkan-fork",
+  "target": {"device": "Pixel 9 Pro XL", "gpu": "Mali-G715", "os": "GrapheneOS"},
+  "pins": {
+    "pocketpal_base": "b5e46f9bd984abe67bc04fbf22d882d932d8d43f",
+    "llama_rn": "v0.13.0-rc.9",
+    "vulkan_headers": "v1.4.339",
+    "spirv_headers": "vulkan-sdk-1.4.363.0",
+    "ndk": "27.3.13750724"
+  },
+  "decisions": [
+    {"date": "2026-11-06", "id": "fork-over-measurement", "rejected": ["termux-remeasure"]},
+    {"date": "2026-11-06", "id": "github-actions-build", "rejected": ["own-pc", "frankfurt-host", "cloud-session"]},
+    {"date": "2026-11-06", "id": "separate-vulkan-variant", "rejected": ["vulkan-in-existing-variants"]},
+    {"date": "2026-11-06", "id": "pregenerate-shaders", "rejected": ["externalproject-host-build"]},
+    {"date": "2026-11-06", "id": "feature-tests-with-O", "rejected": ["remove-tests-hardcoded"]},
+    {"date": "2026-11-06", "id": "f16-build-switch-default-on", "rejected": ["in-app-toggle-now"]},
+    {"date": "2026-11-06", "id": "own-package-id-debug-keystore", "rejected": ["per-run-keystore"]}
+  ],
+  "status": {"ci": "not_run", "device_test": "not_run"},
+  "green_criteria": ["active_gpu_shown", "gguf_answers_correctly", "output_matches_cpu", "speed_near_termux"]
+}

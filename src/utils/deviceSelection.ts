@@ -146,15 +146,18 @@ export async function getDeviceOptions(): Promise<DeviceOption[]> {
 
   // Option 2: GPU/OpenCL (if available)
   if (gpuDev) {
+    const isVulkan = gpuDev.backend?.toLowerCase().includes('vulkan');
     // According to FLASH_ATTN.md Matrix 1: OpenCL only supports 'off' flash attention
     options.push({
       id: 'gpu',
-      label: `GPU (OpenCL)`,
-      description: 'OpenCL GPU acceleration (Only for Q4_0/Q6_K models)',
+      label: isVulkan ? 'GPU (Vulkan)' : 'GPU (OpenCL)',
+      description: isVulkan
+        ? 'Vulkan GPU acceleration'
+        : 'OpenCL GPU acceleration (Only for Q4_0/Q6_K models)',
       devices: [gpuDev.deviceName!],
       n_gpu_layers: 99,
       default_flash_attn_type: 'off', // Required for OpenCL
-      valid_flash_attn_types: ['off'], // OpenCL only supports 'off'
+      valid_flash_attn_types: isVulkan ? ['auto', 'on', 'off'] : ['off'], // OpenCL only supports 'off'
       tag: 'Fastest',
       platform: 'android',
       deviceInfo: gpuDev,
@@ -247,8 +250,9 @@ export function validateModelQuantizationForDevice(
   if (Platform.OS === 'android') {
     // If using GPU (OpenCL) or Auto (which may use OpenCL)
     const mayUseOpenCL =
-      deviceOption.id === 'gpu' ||
-      (deviceOption.id === 'auto' && deviceOption.n_gpu_layers > 0);
+      !deviceOption.deviceInfo?.backend?.toLowerCase().includes('vulkan') &&
+      (deviceOption.id === 'gpu' ||
+        (deviceOption.id === 'auto' && deviceOption.n_gpu_layers > 0));
 
     if (mayUseOpenCL) {
       // OpenCL ONLY supports Q4_0 and Q6_K

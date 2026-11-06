@@ -331,6 +331,8 @@ export const SettingsScreen: React.FC = observer(() => {
 
   const handleDeviceSelect = (option: DeviceOption) => {
     modelStore.setDevices(option.devices);
+    modelStore.setNoGpuDevices(option.id === 'cpu');
+    modelStore.setNGPULayers(option.n_gpu_layers);
 
     // Only update flash attention if current value is not valid for the selected device
     const currentFlashAttn =
@@ -426,6 +428,15 @@ export const SettingsScreen: React.FC = observer(() => {
                       {l10n.settings.cpuOnlyNoAccelerators}
                     </Text>
                   </>
+                )}
+
+                {/* Fork: backend actually used by the loaded model */}
+                {modelStore.context && (
+                  <Text variant="labelSmall" style={styles.textDescription}>
+                    {modelStore.context.gpu
+                      ? `Active: GPU (${modelStore.context.devices?.join(', ') ?? '?'})`
+                      : `Active: CPU${modelStore.context.reasonNoGPU ? ` (${modelStore.context.reasonNoGPU})` : ''}`}
+                  </Text>
                 )}
 
                 {/* OpenCL quantization note for Android */}

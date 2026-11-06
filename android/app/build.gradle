@@ -87,13 +87,14 @@ android {
 
     namespace "com.pocketpal"
     defaultConfig {
-        applicationId "com.pocketpalai"
+        applicationId "com.pocketpalai.vulkan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 159
         versionName "1.22.1"
+        buildConfigField "boolean", "VK_DISABLE_F16", (project.findProperty("vkDisableF16") ?: "true").toString()
         ndk {
-            abiFilters "arm64-v8a", "x86_64"
+            abiFilters "arm64-v8a"
         }
     }
     externalNativeBuild {

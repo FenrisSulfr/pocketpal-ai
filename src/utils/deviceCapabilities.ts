@@ -1,5 +1,6 @@
 import {Platform} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
+import {isGpuAvailable} from './deviceSelection';
 import NativeHardwareInfo from '../specs/NativeHardwareInfo';
 import type {CPUInfo, GPUInfo} from '../specs/NativeHardwareInfo';
 
@@ -92,7 +93,9 @@ export async function checkGpuSupport(): Promise<GpuCapabilities> {
       const hasDotProd = cpuInfo.hasDotProd ?? false;
 
       // All three conditions must be met for OpenCL support
-      const isSupported = hasAdreno && hasI8mm && hasDotProd;
+      // Fork: a GPU reported by the backend (Vulkan on Mali) also counts
+      const isSupported =
+        (hasAdreno && hasI8mm && hasDotProd) || (await isGpuAvailable());
 
       let reason: GpuCapabilities['reason'];
       if (!isSupported) {

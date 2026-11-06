@@ -53,6 +53,9 @@ class MainApplication : Application(), ReactApplication {
     // Must be set before SoLoader.init so the native library picks it up.
     // See: https://github.com/ggml-org/llama.cpp/pull/20997
     Os.setenv("GGML_OPENCL_ADRENO_USE_LARGE_BUFFER", "1", true)
+    if (BuildConfig.VK_DISABLE_F16) {
+      Os.setenv("GGML_VK_DISABLE_F16", "1", true)
+    }
     SoLoader.init(this, OpenSourceMergedSoMapping)
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
