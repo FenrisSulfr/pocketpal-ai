@@ -8,7 +8,7 @@
     "save": "Speichern",
     "update": "Aktualisieren",
     "error": "Fehler",
-    "export": "Export",
+    "export": "Exportieren",
     "networkError": "Netzwerkfehler. Bitte erneut versuchen.",
     "downloadETA": "Restzeit",
     "calculating": "berechne...",
@@ -61,7 +61,7 @@
     "effectiveLabel": "effektiv",
     "physicalBatchSize": "Physikalische Batchgröße",
     "physicalBatchSizeDescription": "Physikalische Batchgröße: {{physicalBatchSize}}{{effectivePhysicalBatch}}",
-    "cpuThreads": "CPU Threads",
+    "cpuThreads": "CPU-Threads",
     "cpuThreadsDescription": "Benutze {{threads}} von {{maxThreads}} verfügbaren Threads",
     "imageMaxTokens": "Max Tokens Bilder",
     "imageMaxTokensDescription": "Maximale Tokens zur Bilderzeugung: {{tokens}}{{effectiveTokens}} (niedriger = schneller, weniger Detail)",
@@ -100,14 +100,14 @@
     "exportOptions": "Export-Optionen",
     "exportLegacyChats": "Exportiere alte Chats",
     "exportLegacyChatsDescription": "Dies nutzen wenn Migration fehlgeschlagen ist oder alte Chats wiederhergestellt werden sollen.",
-    "exportButton": "Export",
+    "exportButton": "Exportieren",
     "importChats": "Importiere Chats",
     "importChatsDescription": "Importiere Chats aus einer (exportierten) JSON Datei.",
-    "importButton": "Import",
+    "importButton": "Importieren",
     "importSuccess": "{{count}} Chats erfolgreich importiert.",
     "importError": "Import von Chats fehlgeschlagen. Bitte Dateiformat überprüfen.",
     "apiSettingsTitle": "Einstellungen API",
-    "huggingFaceTokenLabel": "Hugging Face Token",
+    "huggingFaceTokenLabel": "Hugging-Face-Token",
     "tokenIsSetDescription": "Token gesetzt. Nötig um geschützte Modelle zu nutzen.",
     "setTokenDescription": "Token einfügen um geschützte Modelle zu nutzen.",
     "setTokenButton": "Token einfügen",
@@ -125,7 +125,7 @@
     "weightRepacking": "Aktiviere Gewichtetes Repacking",
     "weightRepackingDescription": "Schnellere Prompt Verarbeitung mit minimalem Speicher Overhead, wenn Speicher Mapping deaktiviert ist. Die Token-Generation bleibt unbeeinflusst.",
     "serverName": "Servername",
-    "serverUrl": "Server URL",
+    "serverUrl": "Server-URL",
     "serverUrlPlaceholder": "z.B. http://192.168.1.100:1234",
     "apiKey": "API Schlüssel",
     "apiKeyPlaceholder": "Optional - erforderlich für OpenAI/Groq",
@@ -148,7 +148,7 @@
     "alreadyAdded": "Bereits hinzugefügt",
     "connectedServers": "Verbundene Server",
     "modelsCount": "{{count}} Modelle",
-    "serverDetails": "Server Details",
+    "serverDetails": "Serverdetails",
     "modelsUsingServer": "Modelle die diesen Server nutzen:",
     "saveChanges": "Änderungen speichern",
     "removeServer": "Server entfernen",
@@ -157,7 +157,7 @@
     "retryConnection": "Wiederholen",
     "enterUrlManually": "URL manuell eingeben",
     "manageServers": "Server verwalten",
-    "speculativeDecoding": "spekulative Entschlüsselung",
+    "speculativeDecoding": "Spekulatives Dekodieren",
     "speculativeDecodingDescription": "Verwenden Sie ein kleines Entwurfsmodell (oder ein eingebettetes MTP-Modell), um Tokens vorherzusagen und die Generierung zu beschleunigen. Experimentell.",
     "speculativeNotMTPCapable": "Das aktive Modell unterstützt kein spekulatives Dekodieren und es ist kein kompatibles Entwurfsmodell zugeordnet. Die Funktion bleibt daher ohne Wirkung ausgeschaltet. Bei geeigneten Modellen wird sie automatisch angewendet.",
     "speculativeDraftModel": "Entwurfsmodell",
@@ -300,7 +300,7 @@
       "noProjectionModels": "Keine Projection Modelle vorhanden",
       "selected": "Ausgewählt",
       "select": "Auswählen",
-      "download": "Download",
+      "download": "Herunterladen",
       "projectionNeededTitle": "Projection Modell benötigt",
       "projectionNeededMessage": "Dieses Modell benötigt ein Projection Modell für multimodale Funktionen.",
       "projectionMissingWarning": "Projection Modell fehlt",
@@ -418,7 +418,7 @@
       },
       "buttons": {
         "settings": "Einstellungen",
-        "download": "Download",
+        "download": "Herunterladen",
         "remove": "Entfernen",
         "load": "Laden",
         "offload": "Entladen"
@@ -438,6 +438,12 @@
         "visionNotSupported": "Nicht unterstützt",
         "visionUnknown": "Unbekannt",
         "draftOnlyReason": "Nur Entwurfsmodell. Wählen Sie es unter Einstellungen → Spekulatives Dekodieren aus."
+      },
+      "projectorOffer": {
+        "rowTitle": "Für Bildverständnis wird das Projektionsmodell benötigt",
+        "download": "Herunterladen",
+        "downloading": "Projektionsmodell wird heruntergeladen · {{progress}} %",
+        "a11yWithSize": "Projektionsmodell herunterladen, {{size}}"
       },
       "accessibility": {
         "expandDetails": "Details erweitern",
@@ -478,7 +484,7 @@
         "addGenerationPrompt": "Generation Prompt hinzufügen",
         "bosTokenPlaceholder": "BOS Token",
         "eosTokenPlaceholder": "EOS Token",
-        "systemPrompt": "System Prompt"
+        "systemPrompt": "Systemprompt"
       }
     },
     "modelDescription": {
@@ -495,7 +501,7 @@
       "instructions": "Instruktionen befolgen",
       "code": "Code erstellen",
       "math": "Mathematische Lösung",
-      "multilingual": "Multilingual",
+      "multilingual": "Mehrsprachig",
       "rewriting": "Umschreiben",
       "creativity": "Kreatives schreiben",
       "vision": "Bildverarbeitung",
@@ -768,7 +774,7 @@
     },
     "downloadErrorDialog": {
       "downloadFailedTitle": "Download gescheitert",
-      "downloadFailedMessage": "Download des Modells gescheitert: {{messing}}",
+      "downloadFailedMessage": "Download des Modells fehlgeschlagen: {{message}}",
       "unauthorizedTitle": "Authentifizierung gescheitert",
       "unauthorizedMessage": "Ihr Hugging Face-Token scheint ungültig oder abgelaufen zu sein. Bitte aktualisieren Sie Ihren Token in den Einstellungen.",
       "forbiddenTitle": "Zugang verweigert",
@@ -808,7 +814,7 @@
       "exportCurrentSessionMarkdown": "Als Markdown exportieren"
     },
     "hfTokenSheet": {
-      "title": "Hugging Face Token",
+      "title": "Hugging-Face-Token",
       "description": "Erforderlich für den Zugriff auf gated Modelle",
       "inputLabel": "Persönlicher Zugriff Token",
       "inputPlaceholder": "Fügen Sie Ihr Token hier ein",
@@ -908,7 +914,7 @@
         "create": "Assistent Pal erstellen",
         "edit": "Assistent Pal bearbeiten"
       },
-      "palName": "Pal Name",
+      "palName": "Pal-Name",
       "palNamePlaceholder": "Name",
       "defaultModel": "Standardmodell",
       "defaultModelPlaceholder": "Modell auswählen",
@@ -925,14 +931,14 @@
       "modelNotDownloadedShort": "Modell nicht heruntergeladen",
       "recommendedModel": "Empfohlenes Modell",
       "cancelDownload": "Download abbrechen",
-      "download": "Download"
+      "download": "Herunterladen"
     },
     "roleplayPalSheet": {
       "title": {
         "create": "Rollenspiel Pal erstellen",
         "edit": "Rollenspiel Pal bearbeiten"
       },
-      "palName": "Pal Name",
+      "palName": "Pal-Name",
       "palNamePlaceholder": "Name",
       "defaultModel": "Standardmodell",
       "defaultModelPlaceholder": "Modell auswählen",
@@ -962,7 +968,7 @@
         "create": "Erstellen Sie Lookie Pal",
         "edit": "Bearbeite Lookie Pal"
       },
-      "palName": "Pal Name",
+      "palName": "Pal-Name",
       "palNamePlaceholder": "Geben Sie einen Namen für Ihren Lookie Pal",
       "visionModel": "Vision Modell",
       "visionModelPlaceholder": "Wählen Sie ein Vision-Modell",
@@ -975,7 +981,7 @@
       "accessibilityLabel": "Sende"
     },
     "systemPromptSection": {
-      "sectionTitle": "System Prompt",
+      "sectionTitle": "Systemprompt",
       "useAIPrompt": "Verwenden Sie KI, um Systemprompt zu generieren",
       "modelSelector": {
         "label": "Modell für Generation* auswählen",
@@ -994,7 +1000,7 @@
         "resetTemplate": "Vorlage zurücksetzen"
       },
       "systemPrompt": {
-        "label": "System Prompt",
+        "label": "Systemprompt",
         "sublabel": "Fühlen Sie sich beim bearbeiten und experimentieren frei, damit Sie den optimalen Prompt für Ihr Szenario finden",
         "placeholder": "Du bist ein hilfsbereiter Assistent"
       },
@@ -1022,7 +1028,7 @@
       "exportCount": "Exportiere ({{count}})",
       "deleteCount": "Löschen ({{count}})",
       "bulkDeleteTitle": "Chatsitzungen löschen",
-      "bulkDeleteMessage": "Lösche {{count} Chat-Sitzung(en)? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "bulkDeleteMessage": "{{count}} Chat-Sitzung(en) löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
       "bulkDeleteError": "Chat-Sitzungen löschen gescheitert. Bitte versuchen Sie es noch mal.",
       "exportError": "Export der Chatsitzungen gescheitert. Bitte versuchen Sie es nochmal.",
       "bulkExportError": "Export der Chatsitzungen gescheitert. Bitte versuchen Sie es nochmal.",
@@ -1048,12 +1054,7 @@
         "total": "Insgesamt ",
         "usage": "Verwendung: "
       },
-      "byteSizes": [
-        "Bytes",
-        "KB",
-        "MB",
-        "GB"
-      ]
+      "byteSizes": ["Byte", "KB", "MB", "GB"]
     },
     "chatView": {
       "menuItems": {
@@ -1095,7 +1096,7 @@
       "myLibrary": "Meine Bibliothek (palshub.ai)",
       "discoverPals": "Entdecken Sie Pals (palshub.ai)"
     },
-    "systemPrompt": "System Prompt",
+    "systemPrompt": "Systemprompt",
     "videoAnalysis": "Videoanalyse",
     "videoAnalysisDescription": "Dies ist ein Video-basierter KI-Assistent, der Echtzeit-Kommentare des Videostreams der Kamera Ihres Geräts liefert.",
     "captureInterval": "Erfassungsinterval",
@@ -1598,21 +1599,34 @@
     "recordingLanguageAuto": "Sprache: automatisch",
     "recordingLanguage": "Sprache: {{code}} (zum Zurücksetzen tippen)",
     "waitingForChatLabel": "Transkription erfolgt, nachdem die Antwort abgeschlossen ist…",
+    "tierNameBase": "Base",
+    "tierNameSmall": "Small",
+    "tierNameLargeTurbo": "Large Turbo",
+    "tierHintBase": "Standard, schnell",
+    "tierHintSmall": "Genauer, langsamer. Besser für andere Sprachen",
+    "tierHintLargeTurbo": "Auf den meisten Telefonen sehr langsam",
     "tierSizeLabel": "{{sizeMb}} MB",
     "installCta": "Herunterladen",
     "downloadingLabel": "Wird heruntergeladen…",
     "retryCta": "Erneut versuchen",
     "removeCta": "Entfernen",
+    "useCta": "Verwenden",
+    "inUseLabel": "In Verwendung",
+    "modelSectionHelper": "Wird für Spracheingabe und freihändige Sprachsteuerung verwendet.",
     "errorPermissionDenied": "Für die Spracheingabe wird Mikrofonzugriff benötigt.",
     "errorPermissionBlocked": "Der Mikrofonzugriff ist blockiert. Aktivieren Sie ihn in den Einstellungen.",
     "errorTranscribeFailed": "Transkription nicht möglich – bitte erneut versuchen.",
     "errorNotInstalled": "Laden Sie ein Sprachmodell herunter, um die Spracheingabe zu nutzen.",
     "errorInsufficientMemory": "Nicht genug Speicher für die Spracheingabe mit diesem Chat-Modell. Versuchen Sie ein kleineres Modell.",
+    "memoryAlertTitle": "Arbeitsspeicher knapp",
+    "memoryAlertBody": "Die Spracheingabe braucht zusätzlich zum Chatmodell Arbeitsspeicher. Sie kann sehr langsam werden, oder die App wird geschlossen.",
+    "memoryAlertTryAnyway": "Trotzdem versuchen",
     "errorMicUnavailable": "Das Mikrofon reagiert nicht. Versuchen Sie es erneut oder wechseln Sie zu einem kleineren Chat-Modell.",
     "errorTranscriptPartial": "Ein Teil Ihres Diktats konnte nicht transkribiert werden.",
     "openSettingsLabel": "Einstellungen öffnen",
     "insufficientStorage": "Nicht genug Speicherplatz – geben Sie {{requiredMb}} MB frei, um dieses Modell zu installieren ({{freeMb}} MB verfügbar).",
-    "setupSheetTitle": "Spracheingabe einrichten"
+    "setupSheetTitle": "Spracheingabe einrichten",
+    "setupSheetBody": "Ein kurzer Download, dann können Sie offline diktieren."
   },
   "onboarding": {
     "back": "Zurück",
@@ -1714,7 +1728,51 @@
   },
   "plus": {
     "eyebrow": "PocketPal Plus",
-    "headline": "Lokale KI weiterentwickeln."
+    "headline": "Lokale KI weiterentwickeln.",
+    "subline": "Plus hält PocketPal kostenlos und Open Source. Die Zusatzfunktionen sind unser Dankeschön.",
+    "unsupportedSubline": "Plus-Funktionen laufen auf diesem Telefon noch nicht. Sie können PocketPal trotzdem unterstützen.",
+    "thanksHeadline": "Danke, dass Sie PocketPal am Laufen halten.",
+    "thanksSubline": "Plus ist auf diesem Gerät freigeschaltet.",
+    "features": {
+      "handsFreeVoice": "Freihändige Sprachsteuerung",
+      "localApiServer": "Lokaler API-Server"
+    },
+    "ready": "Bereit",
+    "needsRam": "Benötigt {{gb}} GB RAM",
+    "comingSoon": "Demnächst",
+    "optIn": "Aus",
+    "optInNote": "Auf diesem Telefon aus. Aktivieren Sie es in den Einstellungen, wenn Sie mutig sind.",
+    "offInSettingsNote": "In den Einstellungen deaktiviert.",
+    "speedLine": "Die Geschwindigkeit hängt von Telefon und Modell ab.",
+    "inDevelopment": "Funktionen in Entwicklung können sich ändern oder nicht erscheinen.",
+    "chatStaysFree": "Plus ist optional. Chatten bleibt kostenlos.",
+    "priceCaption": "Zahlen Sie, was Ihnen angemessen erscheint. Jeder Betrag schaltet dieselben Funktionen frei.",
+    "buyError": "Der Kauf ist nicht durchgegangen. Bitte erneut versuchen.",
+    "getPlus": "Plus holen · {{price}}",
+    "getPlusAnyway": "Plus trotzdem holen · {{price}}",
+    "chooseAmount": "Betrag wählen",
+    "loading": "Wird geladen",
+    "pending": "Ausstehend",
+    "pendingTitle": "Warten auf die Zahlungsbestätigung des Stores.",
+    "pendingBody": "Plus wird automatisch freigeschaltet, sobald die Zahlung durch ist. Sie können diesen Bildschirm schließen.",
+    "unavailableTitle": "Käufe sind gerade nicht verfügbar.",
+    "unavailableBody": "Der Store war nicht erreichbar. Versuchen Sie es später erneut oder stellen Sie einen früheren Kauf wieder her.",
+    "done": "Fertig",
+    "oneTimePurchase": "Einmalkauf",
+    "restore": "Wiederherstellen",
+    "openSource": "Open Source ↗",
+    "licence": "Einmalkauf einer Lizenz zur Nutzung von Plus.",
+    "terms": "Bedingungen",
+    "appleMediaTerms": "Apple Media Services – Bedingungen",
+    "noPurchaseFound": "Kein Plus-Kauf gefunden.",
+    "restoreFailed": "Der Store war nicht erreichbar. Bitte erneut versuchen.",
+    "sidebar": {
+      "title": "PocketPal Plus",
+      "unlocked": "Freigeschaltet",
+      "subtitleOne": "{{first}}",
+      "subtitleTwo": "{{first}}, {{second}}",
+      "subtitleMore": "{{first}}, {{second}} und mehr"
+    }
   },
   "voiceMode": {
     "settingTitle": "Freihändige Sprachsteuerung",
@@ -1743,6 +1801,38 @@
     "micSwitchLabel": "Mikrofon",
     "endLabel": "Sprachmodus beenden",
     "setupTitle": "Sprachmodus einrichten",
-    "setupBody": "Zwei kleine Modelle laufen auf deinem Telefon, damit du offline sprechen kannst."
+    "setupBody": "Zwei kleine Modelle laufen auf deinem Telefon, damit du offline sprechen kannst.",
+    "sttRowTitle": "Spracherkennung",
+    "sttRowModel": "Whisper {{tier}} · {{size}}",
+    "sttProgress": "{{done}} von {{total}}",
+    "sttDownloadFailed": "Download fehlgeschlagen. Bitte erneut versuchen.",
+    "installedLabel": "Installiert",
+    "voiceRowTitle": "Stimme",
+    "voiceRowReady": "{{voice}} · bereit",
+    "voiceRowMissing": "Wählen Sie eine natürliche Stimme. Die Systemstimme funktioniert im Sprachmodus nicht.",
+    "voiceRowFileMissing": "{{voice}} ist noch nicht heruntergeladen. „Weiter“ lädt sie herunter.",
+    "voiceRowFileFailed": "{{voice}} konnte nicht heruntergeladen werden. Stellen Sie eine Internetverbindung her und versuchen Sie es erneut.",
+    "chooseVoiceCta": "Stimme wählen",
+    "micNote": "Als Nächstes fragen wir nach dem Mikrofonzugriff.",
+    "micDenied": "Der Sprachmodus benötigt Mikrofonzugriff.",
+    "continueCta": "Weiter",
+    "memoryTightTitle": "Arbeitsspeicher knapp",
+    "memoryTightBody": "Der Sprachmodus hält drei Modelle gleichzeitig geladen. Auf diesem Telefon kann das langsam sein, oder die App wird geschlossen.",
+    "memoryWontFitTitle": "Nicht genug Arbeitsspeicher",
+    "memoryWontFitBody": "Diese Modelle brauchen mehr Arbeitsspeicher, als dieses Telefon hat. Wählen Sie ein kleineres Modell, um den Sprachmodus zu nutzen.",
+    "memoryChatRow": "Chatmodell · {{name}}",
+    "memorySttRowModel": "Spracherkennung · Whisper {{tier}}",
+    "memoryVoiceRow": "Stimme · {{name}}",
+    "memoryNeeded": "Benötigt",
+    "memoryNeededOfTotal": "{{needed}} von {{total}} auf diesem Telefon",
+    "continueAnywayCta": "Trotzdem fortfahren",
+    "chooseSmallerModelCta": "Kleineres Modell wählen",
+    "startLabel": "Sprachmodus starten",
+    "startLockedLabel": "Freihändige Sprachsteuerung, PocketPal Plus",
+    "startLockedHint": "Öffnet eine kurze Vorschau. Tippen und Diktieren bleiben kostenlos.",
+    "teaserTitle": "Sprachunterhaltung ist eine Plus-Funktion",
+    "teaserBody": "Sprechen Sie freihändig. Die Antwort kommt laut zurück.",
+    "teaserGetPlus": "Plus holen",
+    "teaserKeepTyping": "Weiter tippen, kostenlos"
   }
 }

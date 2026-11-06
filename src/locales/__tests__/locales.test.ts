@@ -46,6 +46,7 @@ const EXPECTED_SECTIONS = [
 const ALL_LANGUAGES: AvailableLanguage[] = [
   'en',
   'ar',
+  'de',
   'es',
   'fa',
   'he',
