@@ -87,7 +87,11 @@ import {type AvailableLanguage, languageDisplayNames, t} from '../../locales';
 import {asrTierHint, asrTierLabel} from '../../utils/asrTierLabel';
 import {checkGpuSupport} from '../../utils/deviceCapabilities';
 import {exportLegacyChatSessions} from '../../utils/exportUtils';
-import {getDeviceOptions, DeviceOption} from '../../utils/deviceSelection';
+import {
+  getDeviceOptions,
+  getAvailableDevices,
+  DeviceOption,
+} from '../../utils/deviceSelection';
 import {
   inferBackendType,
   getAllowedCacheTypeKOptions,
@@ -125,6 +129,16 @@ export const SettingsScreen: React.FC = observer(() => {
   const [showSearchKeySheet, setShowSearchKeySheet] = useState(false);
   const [gpuSupported, setGpuSupported] = useState(false);
   const [deviceOptions, setDeviceOptions] = useState<DeviceOption[]>([]);
+  // Fork: raw backend list for diagnosis
+  const [backendDiag, setBackendDiag] = useState('');
+  useEffect(() => {
+    getAvailableDevices().then(devs =>
+      setBackendDiag(
+        devs.map(d => `${d.backend}/${d.type}/${d.deviceName}`).join(' · ') ||
+          '-',
+      ),
+    );
+  }, []);
   const [currentBackend, setCurrentBackend] = useState<
     'metal' | 'opencl' | 'hexagon' | 'cpu' | 'blas'
   >(Platform.OS === 'ios' ? 'metal' : 'cpu');
@@ -429,6 +443,14 @@ export const SettingsScreen: React.FC = observer(() => {
                     </Text>
                   </>
                 )}
+
+                {/* Fork: diagnosis */}
+                <Text variant="labelSmall" style={styles.textDescription}>
+                  {`Backends: ${backendDiag}`}
+                  {modelStore.context?.androidLib
+                    ? `\nLib: ${modelStore.context.androidLib}`
+                    : ''}
+                </Text>
 
                 {/* Fork: backend actually used by the loaded model */}
                 {modelStore.context && (

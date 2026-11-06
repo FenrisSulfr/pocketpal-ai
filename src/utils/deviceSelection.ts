@@ -128,7 +128,8 @@ export async function getDeviceOptions(): Promise<DeviceOption[]> {
   // Android: Build options based on available devices
   const devices = await getAvailableDevices();
   const hexagonDevice = selectHexagonDevice(devices);
-  const gpuDev = devices.find(d => d.type === 'gpu');
+  // Fork: Mali reports as integrated GPU ('igpu') via Vulkan
+  const gpuDev = devices.find(d => d.type === 'gpu' || d.type === 'igpu');
 
   // Option 1: CPU (always available, recommended for reliability)
   // CPU supports all flash attention types
@@ -318,7 +319,7 @@ export async function isHexagonAvailable(): Promise<boolean> {
  */
 export async function isGpuAvailable(): Promise<boolean> {
   const devices = await getAvailableDevices();
-  return devices.some(d => d.type === 'gpu');
+  return devices.some(d => d.type === 'gpu' || d.type === 'igpu');
 }
 
 /**

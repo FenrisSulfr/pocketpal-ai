@@ -26,6 +26,7 @@ Maschinenlesbare Fassung: `decisions.json`.
 
 - 2026-11-06 Lauf #1 (`fe1929f`): Shader ok (155, alle optionalen Features OFF), Link-Fehler `vkGetPhysicalDeviceFeatures2`, 35 min.
 - 2026-11-06 Lauf #2 (`1e4a476`): Build erfolgreich in 47 min, APK enthält `librnllama_v8_2_dotprod_i8mm_vulkan.so` (39 MB). Gerätetest offen.
+- 2026-11-06 Gerätetest Lauf #2: „CPU only – No hardware accelerators detected“. Vermutete Ursache: Mali meldet sich als `igpu`, App prüfte nur `gpu`. Fix plus Diagnosezeile, Deutsch zugeschaltet (Branch `i18n-de`, für Upstream getrennt).
 
 ## Offene Risiken
 

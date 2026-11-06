@@ -56,9 +56,16 @@ export async function inferBackendType(
   // Android: Check what's actually available
   // Auto mode will use GPU if available, otherwise CPU
   const availableDevices = await getAvailableDevices();
-  const hasGpu = availableDevices.some(d => d.type === 'gpu');
+  const gpuDevice = availableDevices.find(
+    d => d.type === 'gpu' || d.type === 'igpu',
+  );
+  const hasGpu = !!gpuDevice;
 
   if (hasGpu) {
+    // Fork: Vulkan is not OpenCL
+    if (gpuDevice?.backend?.toLowerCase().includes('vulkan')) {
+      return 'cpu';
+    }
     return 'opencl'; // Auto mode uses OpenCL when GPU is available
   }
 
