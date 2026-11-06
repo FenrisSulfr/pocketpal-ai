@@ -42,7 +42,7 @@ diff -ruN a/android/src/main/rnllama/CMakeLists.txt b/android/src/main/rnllama/C
      set(ENABLE_HEXAGON OFF)
      if (${target_name} MATCHES ".*_hexagon.*")
          set(ENABLE_HEXAGON ON)
-@@ -211,6 +216,30 @@
+@@ -211,6 +216,32 @@
          )
      endif ()
  
@@ -67,7 +67,9 @@ diff -ruN a/android/src/main/rnllama/CMakeLists.txt b/android/src/main/rnllama/C
 +            ${RNLLAMA_ROOT_DIR}/third_party/SPIRV-Headers/include
 +        )
 +        target_compile_definitions(${target_name} PRIVATE GGML_USE_VULKAN ${RNLLAMA_VK_FEATURES})
-+        target_link_libraries(${target_name} PRIVATE vulkan)
++        # API-24 stub lacks Vulkan 1.1 symbols (vkGetPhysicalDeviceFeatures2); the
++        # API-29 stub has them. Older devices fail to load this variant and fall back.
++        target_link_libraries(${target_name} PRIVATE ${CMAKE_SYSROOT}/usr/lib/aarch64-linux-android/29/libvulkan.so)
 +    endif ()
 +
      # Optimize for size and performance

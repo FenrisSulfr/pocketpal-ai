@@ -21,6 +21,12 @@ Maschinenlesbare Fassung: `decisions.json`.
 | 2026-11-06 | F16 als Build-Schalter, Standard an | Geringster Aufwand, Vergleich über zwei APKs | Schalter in der App (später möglich) |
 | 2026-11-06 | Eigene Paket-ID `com.pocketpalai.vulkan`, Debug-Keystore | Parallelinstallation, stabile Signatur ohne Secret | Keystore pro Lauf (bricht Updates) |
 
+| 2026-11-06 | Gegen `libvulkan.so`-Stub von API 29 linken | Lauf #1 scheiterte am Link: `vkGetPhysicalDeviceFeatures2` fehlt im API-24-Stub (minSdk 24) | minSdk der App auf 29 heben |
+
+## Log
+
+- 2026-11-06 Lauf #1 (`fe1929f`): Shader ok (155, alle optionalen Features OFF), Link-Fehler `vkGetPhysicalDeviceFeatures2`, 35 min.
+
 ## Offene Risiken
 
 - Der Keystore ist öffentlich im Repo. Für ein Dauer-Setup braucht es einen eigenen Keystore als Actions-Secret.
